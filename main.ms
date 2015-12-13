@@ -2,10 +2,14 @@ include('classes/command_executor.ms')
 include('classes/chat/chat_manager.ms')
 include('classes/file/config.ms')
 include('classes/file/messages.ms')
+include('classes/file/default.ms')
 export('messages', _messages_load())
 export('config', _config_load())
 export('chat.format', _chat_format_load())
 export('chat.length', _chat_length_load())
+#procs load
+_load_procs()
+########
 bind(player_command, null, null, @e,
 	if(_che_has_cmd(@e[prefix])) {
 		cancel()
