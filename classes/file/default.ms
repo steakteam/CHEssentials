@@ -16,11 +16,8 @@ proc(_better_player, @p,
 
 	foreach(@player in all_players()){
 	
-		if(equals(string_position(to_lower(@player), to_lower(@p)), 0)){
-		
-			return(@player)
-		
-		}
+		if(equals(string_position(to_lower(@player), to_lower(@p)), 0)
+			,return(@player))
 	
 	}
 	
