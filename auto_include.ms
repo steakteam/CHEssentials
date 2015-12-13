@@ -1,11 +1,9 @@
 #parse messages
-proc(_pm, @message, @array,
-	foreach(@key:@value in @array) {
-		replace(@message, '%'.@key.'%', @value)
+proc(_pm, @message, @array = '',
+	if(is_array(@array)) {
+		foreach(@key:@value in @array) {
+			@message = replace(@message, '%'.@key.'%', @value)
+		}
 	}
-	return(colorize(@message))
-)
-
-proc(_pm, @message,
 	return(colorize(@message))
 )

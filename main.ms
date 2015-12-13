@@ -7,11 +7,11 @@ export('config', _config_load())
 export('chat.format', _chat_format_load())
 export('chat.length', _chat_length_load())
 bind(player_command, null, null, @e,
-	if(_che_has_cmd(@e[prefix])) {
+	@prefix = replace(@e[prefix], '/', '')
+	if(_che_has_cmd(@prefix)) {
 		cancel()
 		@array = split(' ', @e[command])
 		array_remove(@array, 0)
-		@prefix = replace(@e[prefix], '/', '')
 		_che_run_cmd(@prefix, @array, import('messages'), import('config'))
 	}
 )

@@ -25,7 +25,7 @@ proc(_execute, @command, @array, @messages, @config,
 		} else if(@array[0] == 2 || to_upper(@array[0]) == 'ADVENTURE' || to_upper(@array[0]) == 'A') {
 			set_pmode(player(), 'ADVENTURE')
 			msg(_pm(@messages[gmchange], array(player(), 'ADVENTURE')))
-		} else if(@array[0] == 1 || to_upper(@array[0]) == 'SPECTATOR' || to_upper(@array[0]) == 'SP') {
+		} else if(@array[0] == 3 || to_upper(@array[0]) == 'SPECTATOR' || to_upper(@array[0]) == 'SP') {
 			set_pmode(player(), 'SPECTATOR')
 			msg(_pm(@messages[gmchange], array(player(), 'SPECTATOR')))
 		} else {
@@ -42,7 +42,7 @@ proc(_execute, @command, @array, @messages, @config,
 			} else if(@array[0] == 2 || to_upper(@array[0]) == 'ADVENTURE' || to_upper(@array[0]) == 'A') {
 				set_pmode(player(), 'ADVENTURE')
 				msg(_pm(@messages[gmchange], array(player(), 'ADVENTURE')))
-			} else if(@array[0] == 1 || to_upper(@array[0]) == 'SPECTATOR' || to_upper(@array[0]) == 'SP') {
+			} else if(@array[0] == 3 || to_upper(@array[0]) == 'SPECTATOR' || to_upper(@array[0]) == 'SP') {
 				set_pmode(player(), 'SPECTATOR')
 				msg(_pm(@messages[gmchange], array(player(), 'SPECTATOR')))
 			} else {

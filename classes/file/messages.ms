@@ -5,6 +5,7 @@ return(array(
 	'gmchange':'&c%0% &6님의 게임 모드가 &c%1% &6으로 변경되었습니다.',
 	'noonline': '&c그 플레이어는 온라인이 아닙니다!',
 	'wronguse.gamemode': '&c사용법:/%0% [게임모드] [플레이어]',
-	'wronguse.heal': '&c사용법:/%0% [플레이어]'
+	'wronguse.heal': '&c사용법:/%0% [플레이어]',
+	'healed': '&c%0% &6님이 회복되었습니다.'
 ))
 )

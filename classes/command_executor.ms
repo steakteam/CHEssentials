@@ -14,7 +14,6 @@ proc(_che_run_cmd, @command, @array, @messages, @config,
 proc(_che_has_cmd, @command,
 	if(array_index_exists(_commands(), @command)) {
 		return(true)
-		msg('true')
 	} else {
 		return(false)
 	}
