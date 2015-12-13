@@ -11,7 +11,8 @@ bind(player_command, null, null, @e,
 		cancel()
 		@array = split(' ', @e[command])
 		array_remove(@array, 0)
-		_che_run_cmd(@e[prefix], @array, import('messages'), import('config'))
+		@prefix = replace(@e[prefix], '/', '')
+		_che_run_cmd(@prefix, @array, import('messages'), import('config'))
 	}
 )
 
