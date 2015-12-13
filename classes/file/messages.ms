@@ -1,4 +1,3 @@
-﻿
 proc(_messages_load,
 return(array(
 	'noperm':'&c이것을 실행할 권한이 없습니다!',
