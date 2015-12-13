@@ -8,6 +8,7 @@ proc(_execute, @command, @array, @messages, @config,
 			set_phealth(get_max_health(entity_id(pinfo(player(), 13))))
 			set_phunger(20)
 			msg(_pm(@messages[healed], array(@array[0])))
+			tmsg(@array[0], _pm(@messages[healed], array(@array[0])))
 		} else {
 			msg(colorize(@messages[noonline]))
 		}
