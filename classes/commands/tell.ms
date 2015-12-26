@@ -4,7 +4,7 @@ proc(_execute, @command, @array, @messages, @config,
 		die(_pm(@messages['tell.wronguse'], array(@command)));
 	}else{
 		@p = player()
-		@targetp = @array[0]
+		@targetp = player(@array[0])
 		if(!ponline(@targetp)){ msg(_pm(@messages['noonline'])); die(_pm(@messages['tell.wronguse'], array(@command))); }
 		if(equals_ic(@p, @targetp)){ die(_pm(@messages['tell.sameperson'])); }
 		array_remove(@array, 0)
@@ -18,8 +18,8 @@ proc(_execute, @command, @array, @messages, @config,
 			@message = sconcat(@message, @array[@di])
 		}
 		
-		@smsg = replace(replace(replace(replace(@format1, '<me>', @p), '<targetplayer>', @targetp), '<message>', @message), '&', '§')
-		@tmsg = replace(replace(replace(replace(@format2, '<me>', @p), '<targetplayer>', @targetp), '<message>', @message), '&', '§')
+		@smsg = replace(replace(replace(@format1, '<me>', @p), '<targetplayer>', @targetp), '<message>', @message)
+		@tmsg = replace(replace(replace(@format2, '<me>', @p), '<targetplayer>', @targetp), '<message>', @message)
 		
 		msg(@smsg)
 		tmsg(@targetp, @tmsg)
