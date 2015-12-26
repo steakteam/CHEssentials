@@ -23,6 +23,7 @@ proc(_messages_load,
 		'kick.sucmsg': '당신은 %0% 님을 킥하셨습니다.',
 		'getpos.wronguse': '&c사용법:/%0% (플레이어)',
 		'getpos.printmsg': '&6%0% 님의 위치는 &a( %1%, %2%, %3%, %4% )&6 입니다.',
-		'tell.wronguse': '&c사용법:/%0% [플레이어] [할말]'
+		'tell.wronguse': '&c사용법:/%0% [플레이어] [할말]',
+		'tell.sameperson': '&c자신에게는 메세지를 보낼 수 없습니다.'
 	))
 )
