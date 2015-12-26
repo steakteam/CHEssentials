@@ -6,6 +6,7 @@ proc(_execute, @command, @array, @messages, @config,
 		@p = player()
 		@targetp = @array[0]
 		if(!ponline(@targetp)){ msg(_pm(@messages['noonline'])); die(_pm(@messages['tell.wronguse'], array(@command))); }
+		if(equals_ic(@p, @targetp)){ die(_pm(@messages['tell.sameperson'])); }
 		array_remove(@array, 0)
 		@as = array_size(@array)
 		@format1 = @config['outtell']
