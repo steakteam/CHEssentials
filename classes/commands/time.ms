@@ -2,27 +2,34 @@
 
 proc(_execute, @command, @array, @messages, @config,
 	if(array_size(@array) == 0 || array_size(@array) >= 3){
-		msg(_pm(@messages['time.wronguse'], array(@command)));
+		die(_pm(@messages['time.wronguse'], array(@command)));
 	}
 	if(array_size(@array) == 1){
+	
 		try( @time = integer(@array[0]) , @e , @time = _istime(@array[0]) , array(CastException) )
-		if(!@time){ msg(_pm(@messages['time.wronguse'], array(@command))); exit(); }
+		if(!@time){ die(_pm(@messages['time.wronguse'], array(@command)));}
 		set_ptime(@time)
-		msg(_pm(@messages['time.settime'], array(@time)));
+		die(_pm(@messages['time.settime'], array(@time)));
+		
 	}
 	if(array_size(@array) == 2){
+	
 		if(equals_ic(@array[0], 'set')){
+		
 		try( @time = integer(@array[1]) , @e , @time = _istime(@array[0]);, array(CastException) )
-		if(!@time){ msg(_pm(@messages['time.wronguse'], array(@command))); exit(); }
+		if(!@time){ die(_pm(@messages['time.wronguse'], array(@command))); }
 		set_ptime(@time)
-		msg(_pm(@messages['time.settime'], array(@time)));
+		die(_pm(@messages['time.settime'], array(@time)));
+		
 		}else if(equals_ic(@array[0], 'add')){
-		try( @time2 = integer(@array[1]) , @e , broadcast(c);msg(_pm(@messages['time.wronguse'], array(@command))); exit(); , array(CastException) )
+		
+		try( @time2 = integer(@array[1]) , @e , die(_pm(@messages['time.wronguse'], array(@command))); , array(CastException) )
 		@ctime = pget_time()
 		@time = (add(@ctime, @time2) % 24000)
 		set_ptime(@time)
-		msg(_pm(@messages['time.settime'], array(@time)));
-		}else{ msg(_pm(@messages['time.wronguse'], array(@command))); }
+		die(_pm(@messages['time.settime'], array(@time)));
+		
+		}else{ die(_pm(@messages['time.wronguse'], array(@command))); }
 	}
 )
 
