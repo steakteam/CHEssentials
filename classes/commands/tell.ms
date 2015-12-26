@@ -22,6 +22,8 @@ proc(_execute, @command, @array, @messages, @config,
 		
 		msg(@smsg)
 		tmsg(@targetp, @tmsg)
+		
+		export(@targetp.'.lastsender', @p)
 	}
 
 )
