@@ -15,6 +15,8 @@ proc(_messages_load,
 		'time.wronguse': '&c사용법:/%0% [시간] or /%0% [Set | Add] [시간]',
 		'time.settime': '&6시간이 %0% 으로 설정되었습니다.',
 		'sky.wronguse': '&c사용법:/%0% [sun|rain]',
-		'sky.changesky': '&6날씨가 %0% 으로 바뀌었습니다.'
+		'sky.changesky': '&6날씨가 %0% 으로 바뀌었습니다.',
+		'lightning.wronguse': '&c사용법:/%0% (플레이어)',
+		'lightning.smite': '&6번개가 %0%, %1%, %2% 에 떨어졌습니다.'
 	))
 )
