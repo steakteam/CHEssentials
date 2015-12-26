@@ -4,6 +4,7 @@ proc(_execute, @command, @array, @messages, @config,
 		export(player().'.infotool', 'none')
 		msg(_pm(@messages['infotool.deactivated']))
 	} else {
+		if(is_null(pinv(player(), null))){ die(_pm(@messages['infotool.noheld'])) }
 		export(player().'.infotool', pinv(player(), null))
 		bind(player_interact, array(id: player().'.infotool'), null, @e, @messages,
 			if(pinv(player(), null) == import(player().'.infotool') && @e[block] != '0') {
