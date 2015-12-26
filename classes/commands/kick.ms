@@ -8,7 +8,7 @@ proc(_execute, @command, @array, @messages, @config,
 	
 		@p = @array[0]
 		if(!ponline(@p)){ msg(_pm(@messages['noonline'])); die(_pm(@messages['kick.wronguse'])); }
-		pkick(@p, _pm(@messages['kick.defaultmsg']))
+		pkick(@p, _pm(replace(@messages['kick.defaultmsg'], '&', '§')))
 		die(_pm(@messages['kick.sucmsg'], array(@p)));
 		
 	}
