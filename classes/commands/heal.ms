@@ -13,7 +13,7 @@ proc(_execute, @command, @array, @messages, @config,
 			msg(colorize(@messages[noonline]))
 		}
 	} else {
-		msg(_pm(@messages['heal.wronguse'], @command))
+		msg(_pm(@messages['heal.wronguse'], array(@command)))
 	}
 )
 

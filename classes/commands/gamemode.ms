@@ -13,7 +13,7 @@ proc(_execute, @command, @array, @messages, @config,
 			set_pmode(player(), 'SURVIVAL')
 			msg(_pm(@messages['gamemode.changed'], array(player(), 'SURVIVAL')))
 		} else {
-			msg(_pm(@messages['gamemode.wronguse'], @command))
+			msg(_pm(@messages['gamemode.wronguse'], array(@command)))
 		}
 	} else if(array_size(@array) == 1) {
 		if(@array[0] == 0 || to_upper(@array[0]) == 'SURVIVAL' || to_upper(@array[0]) == 'S') {
@@ -29,7 +29,7 @@ proc(_execute, @command, @array, @messages, @config,
 			set_pmode(player(), 'SPECTATOR')
 			msg(_pm(@messages['gamemode.changed'], array(player(), 'SPECTATOR')))
 		} else {
-			msg(_pm(@messages['gamemode.wronguse'], @command))
+			msg(_pm(@messages['gamemode.wronguse'], array(@command)))
 		}
 	} else if(array_size(@array) == 2) {
 		if(ponline(@array[1])) {
@@ -50,13 +50,13 @@ proc(_execute, @command, @array, @messages, @config,
 				msg(_pm(@messages['gamemode.changed'], array(@array[1], 'SPECTATOR')))
 				tmsg(@array[1], _pm(@messages['gamemode.changed'], array(@array[1], 'SPECTATOR')))
 			} else {
-				msg(_pm(@messages['gamemode.wronguse'], @command))
+				msg(_pm(@messages['gamemode.wronguse'], array(@command)))
 			}
 		} else {
-			msg(_pm(@messages['gamemode.wronguse'], @command))
+			msg(_pm(@messages['gamemode.wronguse'], array(@command)))
 		}
 	} else {
-		msg(colorize(@messages['gamemode.wronguse']))
+		msg(colorize(@messages['gamemode.wronguse'], array(@command)))
 	}
 )
 
