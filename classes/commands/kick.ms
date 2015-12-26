@@ -7,7 +7,7 @@ proc(_execute, @command, @array, @messages, @config,
 	if(array_size(@array) == 1){
 	
 		@p = @array[0]
-		if(!ponline(@p)){ msg(_pm(@messages['noonline'])); die(_pm(@messages['kick.wronguse'])); }
+		if(!ponline(@p)){ msg(_pm(@messages['noonline'])); die(_pm(@messages['kick.wronguse'], array(@command))); }
 		pkick(@p, _pm(replace(@messages['kick.defaultmsg'], '&', '§')))
 		die(_pm(@messages['kick.sucmsg'], array(@p)));
 		
@@ -16,7 +16,7 @@ proc(_execute, @command, @array, @messages, @config,
 	if(array_size(@array) >= 2){
 	
 		@p = @array[0]
-		if(!ponline(@p)){ msg(_pm(@messages['noonline'])); die(_pm(@messages['kick.wronguse'])); }
+		if(!ponline(@p)){ msg(_pm(@messages['noonline'])); die(_pm(@messages['kick.wronguse'], array(@command))); }
 		
 		array_remove(@array, 0)
 		@as = array_size(@array)
