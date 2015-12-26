@@ -1,5 +1,5 @@
 proc(_commands,
-return(array('heal': 'heal.ms', 'gamemode': 'gamemode.ms', 'gm': 'gamemode.ms', 'top':'top.ms', 'infotool':'infotool.ms'))
+return(array('heal': 'heal.ms', 'gamemode': 'gamemode.ms', 'gm': 'gamemode.ms', 'top':'top.ms', 'infotool':'infotool.ms', 'time':'time.ms'))
 )
 
 proc(_che_run_cmd, @command, @array, @messages, @config,
