@@ -12,6 +12,8 @@ proc(_messages_load,
 		'infotool.activated': '&cinfotool&6이 아이템 &c%0% &6에 등록되었습니다. 사용을 중지하시려면 &c/infotool &6을 한번 더 입력해 주세요.',
 		'infotool.deactivated': '&cinfotool&6이 꺼졌습니다. 다시 사용하시려면 &c/infotool &6을 한번 더 입력해 주세요.',
 		'time.wronguse': '&c사용법:/%0% [시간] or /%0% [Set | Add] [시간]',
-		'time.settime': '&6시간이 %0% 으로 설정되었습니다.'
+		'time.settime': '&6시간이 %0% 으로 설정되었습니다.',
+		'sky.wronguse': '&c사용법:/%0% [sun|rain]',
+		'sky.changesky': '&6날씨가 %0% 으로 바뀌었습니다.'
 	))
 )
