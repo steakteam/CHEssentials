@@ -1,5 +1,5 @@
 proc(_commands,
-return(array('heal': 'heal.ms', 'gamemode': 'gamemode.ms', 'gm': 'gamemode.ms'))
+return(array('heal': 'heal.ms', 'gamemode': 'gamemode.ms', 'gm': 'gamemode.ms', 'top':'top.ms', 'infotool':'infotool.ms'))
 )
 
 proc(_che_run_cmd, @command, @array, @messages, @config,
@@ -7,7 +7,7 @@ proc(_che_run_cmd, @command, @array, @messages, @config,
 		if(_has_permission()) {
 			_execute(@command, @array, @messages, @config)
 		} else {
-			msg(colorize(@messages[noperm]))
+			msg(_pm(@messages[noperm]))
 		}
 )
 

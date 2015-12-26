@@ -1,10 +1,15 @@
 proc(_messages_load,
-return(array(
-	'noperm':'&c이것을 실행할 권한이 없습니다!',
-	'gmchange':'&c%0% &6님의 게임 모드가 &c%1% &6으로 변경되었습니다.',
-	'noonline': '&c그 플레이어는 온라인이 아닙니다!',
-	'wronguse.gamemode': '&c사용법:/%0% [게임모드] [플레이어]',
-	'wronguse.heal': '&c사용법:/%0% [플레이어]',
-	'healed': '&c%0% &6님이 회복되었습니다.'
-))
+	return(array(
+		'noperm':'&c이것을 실행할 권한이 없습니다!',
+		'gamemode.changed':'&c%0% &6님의 게임 모드가 &c%1% &6으로 변경되었습니다.',
+		'noonline': '&c그 플레이어는 온라인이 아닙니다!',
+		'gamemode.wronguse': '&c사용법:/%0% [게임모드] [플레이어]',
+		'heal.wronguse': '&c사용법:/%0% [플레이어]',
+		'heal.healed': '&c%0% &6님이 회복되었습니다.',
+		'top.gototop': '&6최상층으로 이동하였습니다.',
+		'top.notop': '&c더이상 위로 올라갈 수 없습니다!',
+		'infotool.clicked': '&6당신이 클릭한 블록은 &c%0% &6입니다.\n&6이 도구의 사용을 중지하려면 &c/infotool &6을 다시 입력하세요.',
+		'infotool.activated': '&cinfotool&6이 아이템 &c%0% &6에 등록되었습니다. 사용을 중지하시려면 &c/infotool &6을 한번 더 입력해 주세요.',
+		'infotool.deactivated': '&cinfotool&6이 꺼졌습니다. 다시 사용하시려면 &c/infotool &6을 한번 더 입력해 주세요.'
+	))
 )
