@@ -20,6 +20,8 @@ proc(_messages_load,
 		'lightning.smite': '&6번개가 %0%, %1%, %2% 에 떨어졌습니다.',
 		'kick.wronguse': '&c사용법:/%0% [플레이어]',
 		'kick.defaultmsg': '&c당신은 킥 되셨습니다.',
-		'kick.sucmsg': '당신은 %0% 님을 킥하셨습니다.'
+		'kick.sucmsg': '당신은 %0% 님을 킥하셨습니다.',
+		'getpos.wronguse': '&c사용법:/%0% (플레이어)',
+		'getpos.printmsg': '&6%0% 님의 위치는 &a( %1%, %2%, %3%, %4% )&6 입니다.'
 	))
 )
