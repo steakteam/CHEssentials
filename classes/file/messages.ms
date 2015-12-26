@@ -17,6 +17,9 @@ proc(_messages_load,
 		'sky.wronguse': '&c사용법:/%0% [sun|rain]',
 		'sky.changesky': '&6날씨가 %0% 으로 바뀌었습니다.',
 		'lightning.wronguse': '&c사용법:/%0% (플레이어)',
-		'lightning.smite': '&6번개가 %0%, %1%, %2% 에 떨어졌습니다.'
+		'lightning.smite': '&6번개가 %0%, %1%, %2% 에 떨어졌습니다.',
+		'kick.wronguse': '&c사용법:/%0% [플레이어]',
+		'kick.defaultmsg': '&c당신은 킥 되셨습니다.',
+		'kick.sucmsg': '당신은 %0% 님을 킥하셨습니다.'
 	))
 )
