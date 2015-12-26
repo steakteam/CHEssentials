@@ -10,6 +10,8 @@ proc(_execute, @command, @array, @messages, @config,
 		@loc = array(integer(ploc(@p)[0]), integer(ploc(@p)[1]), integer(ploc(@p)[2]), 'world':ploc(@p)[world])
 		lightning(@loc)
 		die(_pm(@messages['lightning.smite'], array(@loc[0], @loc[1], @loc[2])))
+	}else{ 
+		die(_pm(@messages['lightning.wronguse'], array(@command)))
 	}
 )
 
