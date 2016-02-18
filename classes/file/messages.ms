@@ -26,6 +26,8 @@ proc(_messages_load,
 		'tell.wronguse': '&c사용법:/%0% [플레이어] [할말]',
 		'tell.sameperson': '&c자신에게는 메세지를 보낼 수 없습니다.',
 		'reply.wronguse': '&c사용법:/%0% [할말]',
-		'reply.noplayer': '&c답장을 보낼 상대가 없습니다.'
+		'reply.noplayer': '&c답장을 보낼 상대가 없습니다.',
+		'killall.help': '&c사용법:/%0% [월드]',
+		'killall.complete': '&d%0% 마리의 엔티티들이 제거되었습니다.'
 	))
 )
