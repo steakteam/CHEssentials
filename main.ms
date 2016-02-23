@@ -7,7 +7,7 @@ export('config', _config_load())
 export('chat.format', _chat_format_load())
 export('chat.length', _chat_length_load())
 bind(player_command, null, null, @e,
-	@string = split('', @prefix)
+	@string = split('', @e[prefix])
 	if(equals_ic(@string[1], 'c') && equals_ic(@string[2], 'h') && equals_ic(@string[3], 'e')){
 	@prefix = replace(@e[prefix], '/che', '')
 	}else{
