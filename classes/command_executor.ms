@@ -1,7 +1,7 @@
 proc(_commands,
 return(array('heal': 'heal.ms', 'gamemode': 'gamemode.ms', 'gm': 'gamemode.ms', 'top':'top.ms', 'infotool':'infotool.ms', 'time':'time.ms',
              'sky':'sky.ms', 'weather':'sky.ms', 'lightning':'lightning.ms', 'kick':'kick.ms', 'getpos':'getpos.ms', 'tell':'tell.ms',
-             'whisper':'tell.ms', 'w':'tell.ms', 't':'tell.ms', 'msg':'tell.ms', 'reply':'reply.ms', 'r':'reply.ms'))
+             'whisper':'tell.ms', 'w':'tell.ms', 't':'tell.ms', 'msg':'tell.ms', 'reply':'reply.ms', 'r':'reply.ms', 'tppos': 'tppos.ms', 'fly': 'fly.ms'))
 )
 
 proc(_che_run_cmd, @command, @array, @messages, @config,

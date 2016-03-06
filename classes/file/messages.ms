@@ -1,6 +1,7 @@
 proc(_messages_load,
 	return(array(
 		'noperm':'&c이것을 실행할 권한이 없습니다!',
+		'teleporting': '&6텔레포트 중 입니다..',
 		'gamemode.changed':'&c%0% &6님의 게임 모드가 &c%1% &6으로 변경되었습니다.',
 		'noonline': '&c그 플레이어는 온라인이 아닙니다!',
 		'gamemode.wronguse': '&c사용법:/%0% [게임모드] [플레이어]',
@@ -28,6 +29,10 @@ proc(_messages_load,
 		'reply.wronguse': '&c사용법:/%0% [할말]',
 		'reply.noplayer': '&c답장을 보낼 상대가 없습니다.',
 		'killall.help': '&c사용법:/%0% [월드]',
-		'killall.complete': '&d%0% 마리의 엔티티들이 제거되었습니다.'
+		'killall.complete': '&d%0% 마리의 엔티티들이 제거되었습니다.',
+		'tppos.wronguse': '&c사용법: /%0% (x) (y) (z)',
+		'fly.toggle': '&6플레이어 &f%0% &6의 비행 모드를 %1% &6시켰습니다.',
+		'fly.true': '&c활성화',
+		'fly.false': '&c비활성화'
 	))
 )
