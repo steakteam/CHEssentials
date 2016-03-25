@@ -2,7 +2,6 @@ proc(_write_file_in_folder, @filename, @string,
 	if(!file_exists('../../../../CHEssentials/') || !is_dir('../../../../CHEssentials/')) {
 		create_dir('../../../../CHEssentials/')
 	}
-	broadcast(file_exists('../../../../CHEssentials/'.@filename))
 	if(!file_exists('../../../../CHEssentials/'.@filename) || !is_file('../../../../CHEssentials/'.@filename)) {
 		create_file('../../../../CHEssentials/'.@filename)
 	}
@@ -56,7 +55,7 @@ proc(_has_messages,
 proc(_make_default_config,
 	_write_config(
 		array(
-			'chat':array('format': '<player> : <message>', 'length', '-1'),
+			'chat':array('format': '<player> : <message>', 'length':'-1'),
 			'outtell':('§6[§f <me> → <targetplayer> §6]§f<message>'),
 			'receivetell':('§6[§f <targetplayer> ← <me> §6]§f<message>')
 		)
