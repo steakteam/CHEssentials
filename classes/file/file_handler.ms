@@ -53,7 +53,11 @@ proc(_has_messages,
 )
 
 proc(_make_default_config,
-	_write_config(
+	_write_config(_get_default_config())
+)
+
+proc(_get_default_config,
+	return(
 		array(
 			'chat':array('format': '<player> : <message>', 'length':'-1'),
 			'outtell':('§6[§f <me> → <targetplayer> §6]§f<message>'),
@@ -63,7 +67,11 @@ proc(_make_default_config,
 )
 
 proc(_make_default_messages,
-	_write_messages(
+	_write_messages(_get_default_messages())
+)
+
+proc(_get_default_messages,
+	return(
 		array(
 			'noperm':'&c이것을 실행할 권한이 없습니다!',
 			'teleporting': '&6텔레포트 중 입니다..',
@@ -98,7 +106,50 @@ proc(_make_default_messages,
 			'tppos.wronguse': '&c사용법: /%0% (x) (y) (z)',
 			'fly.toggle': '&6플레이어 &f%0% &6의 비행 모드를 %1% &6시켰습니다.',
 			'fly.true': '&c활성화',
-			'fly.false': '&c비활성화'
+			'fly.false': '&c비활성화',
+			'chessentials.usage': '&c사용법: /%0% <reload>',
+			'chessentials.reloaded': '&6CHEssentials 버전 %0% 리로드됨.',
+			'chessentials.version':'0.1-SNAPSHOT'
 		)
 	)
+)
+
+proc(_update_config,
+	@config = import('chessentials.config')
+	@new = _get_default_config()
+	foreach(@key:@value in @new) {
+		if(!array_index_exists(@config, @key)) {
+			array_set(@config, @key, @value)
+		}
+	}
+	_write_config(@config)
+	export('chessentials.config', @config)
+)
+
+proc(_update_messages,
+	@config = import('chessentials.messages')
+	@new = _get_default_messages()
+	foreach(@key:@value in @new) {
+		if(!array_index_exists(@config, @key)) {
+			array_set(@config, @key, @value)
+		}
+	}
+	_write_messages(@config)
+	export('chessentials.messages', @config)
+)
+
+proc(_load_config,
+	if(!_has_config()) {
+		_make_default_config()
+	}
+
+	if(!_has_messages()) {
+		_make_default_messages()
+	}
+	export('chessentials.messages', _read_messages())
+	export('chessentials.config', _read_config())
+	export('chessentials.chat.format', import('chessentials.config')[chat][format])
+	export('chessentials.chat.length', import('chessentials.config')[chat][length])
+	_update_config()
+	_update_messages()
 )

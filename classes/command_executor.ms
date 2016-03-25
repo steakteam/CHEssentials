@@ -23,12 +23,11 @@ proc(_register_commands,
 @array = array()
 foreach(@value in list_files('commands/')) {
 	include('commands/'.@value)
-	if(array_contains(get_procedures(), '_command')) {
-		@commands = _command()
-		foreach(@cmd in @commands) {
-			array_set(@array, @cmd, @value)
-		}
+	@commands = _command()
+	foreach(@cmd in @commands) {
+		array_set(@array, @cmd, @value)
 	}
 }
+broadcast(@array)
 export('chessentials.commands', @array)
 )
