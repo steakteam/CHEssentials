@@ -68,3 +68,5 @@ if(equals_ic(@time, 'sunrise')){ return(23000) }
 return(false)
 
 )
+
+proc(_command, return(array('time')))

@@ -21,3 +21,5 @@ msg(_pm(@messages['killall.complete'], array(@entities)));
 proc(_has_permission,
 return(has_permission(player(), 'che.command.killall'))
 )
+
+proc(_command, return(array('killall')))

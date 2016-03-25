@@ -21,3 +21,5 @@ proc(_execute, @command, @array, @messages, @config,
 proc(_has_permission,
 return(has_permission(player(), 'che.command.sky'))
 )
+
+proc(_command, return(array('sky', 'weather')))

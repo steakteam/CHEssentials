@@ -26,3 +26,5 @@ if(array_contains(@type, split(':', @id)[0])) {
 	return(false)
 }
 )
+
+proc(_command, return(array('top')))

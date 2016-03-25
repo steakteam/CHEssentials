@@ -6,3 +6,7 @@ proc(_execute, @command, @array, @messages, @config,
 proc(_has_permission,
 return(has_permission(player(), 'che.command.fly'))
 )
+
+proc(_command,
+return(array('fly'))
+)

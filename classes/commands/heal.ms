@@ -20,3 +20,7 @@ proc(_execute, @command, @array, @messages, @config,
 proc(_has_permission,
 	return(has_permission(player(), 'che.command.heal'))
 )
+
+proc(_command,
+	return(array('heal'))
+)

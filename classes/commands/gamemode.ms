@@ -63,3 +63,7 @@ proc(_execute, @command, @array, @messages, @config,
 proc(_has_permission,
 return(has_permission(player(), 'che.command.gamemode'))
 )
+
+proc(_command,
+	return(array('gamemode', 'gm'))
+)

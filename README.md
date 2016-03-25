@@ -5,7 +5,7 @@ Essentials plugin rework for CommandHelper
 
 CommandHelper
 
-CHDangerous
+CHFiles(Download at [Here](https://github.com/itstake/CHFiles/releases))
 
 
 # 설치 방법

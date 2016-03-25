@@ -1,7 +1,5 @@
 proc(_commands,
-return(array('heal': 'heal.ms', 'gamemode': 'gamemode.ms', 'gm': 'gamemode.ms', 'top':'top.ms', 'infotool':'infotool.ms', 'time':'time.ms',
-             'sky':'sky.ms', 'weather':'sky.ms', 'lightning':'lightning.ms', 'kick':'kick.ms', 'getpos':'getpos.ms', 'tell':'tell.ms',
-             'whisper':'tell.ms', 'w':'tell.ms', 't':'tell.ms', 'msg':'tell.ms', 'reply':'reply.ms', 'r':'reply.ms', 'tppos': 'tppos.ms', 'fly': 'fly.ms'))
+return(import('chessentials.commands'))
 )
 
 proc(_che_run_cmd, @command, @array, @messages, @config,
@@ -19,4 +17,18 @@ proc(_che_has_cmd, @command,
 	} else {
 		return(false)
 	}
+)
+
+proc(_register_commands,
+@array = array()
+foreach(@value in list_files('commands/')) {
+	include('commands/'.@value)
+	if(array_contains(get_procedures(), '_command')) {
+		@commands = _command()
+		foreach(@cmd in @commands) {
+			array_set(@array, @cmd, @value)
+		}
+	}
+}
+export('chessentials.commands', @array)
 )
