@@ -36,12 +36,21 @@ proc(_read_messages,
 	return(yml_decode(@yml))
 )
 
+proc(_read_mails,
+	@json = _read_file_in_folder('mails.json')
+	return(json_decode(@json))
+)
+
 proc(_write_config, @configArray,
 	_write_file_in_folder('config.yml', yml_encode(@configArray, true))
 )
 
 proc(_write_messages, @messageArray,
 	_write_file_in_folder('messages.yml', yml_encode(@messageArray, true))
+)
+
+proc(_write_mails, @mailArray,
+	_write_file_in_folder('mails.json', json_encode(@mailArray))
 )
 
 proc(_has_config,
@@ -52,6 +61,10 @@ proc(_has_messages,
 	return(file_exists('../../../../CHEssentials/messages.yml'))
 )
 
+proc(_has_mails,
+	return(file_exists('../../../../CHEssentials/mails.json'))
+)
+
 proc(_make_default_config,
 	_write_config(_get_default_config())
 )
@@ -60,8 +73,8 @@ proc(_get_default_config,
 	return(
 		array(
 			'chat':array('format': '<player> : <message>', 'length':'-1'),
-			'outtell':('Â§6[Â§f <me> â†’ <targetplayer> Â§6]Â§f<message>'),
-			'receivetell':('Â§6[Â§f <targetplayer> â† <me> Â§6]Â§f<message>')
+			'outtell':('¡×6[¡×f <me> ¡æ <targetplayer> ¡×6]¡×f<message>'),
+			'receivetell':('¡×6[¡×f <targetplayer> ¡ç <me> ¡×6]¡×f<message>')
 		)
 	)
 )
@@ -70,46 +83,64 @@ proc(_make_default_messages,
 	_write_messages(_get_default_messages())
 )
 
+proc(_make_default_mails,
+	_write_mails(_get_default_mails())
+)
+
 proc(_get_default_messages,
 	return(
 		array(
-			'noperm':'&cì´ê²ƒì„ ì‹¤í–‰í•  ê¶Œí•œì´ ì—†ìŠµë‹ˆë‹¤!',
-			'teleporting': '&6í…”ë ˆí¬íŠ¸ ì¤‘ ì…ë‹ˆë‹¤..',
-			'gamemode.changed':'&c%0% &6ë‹˜ì˜ ê²Œì„ ëª¨ë“œê°€ &c%1% &6ìœ¼ë¡œ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.',
-			'noonline': '&cê·¸ í”Œë ˆì´ì–´ëŠ” ì˜¨ë¼ì¸ì´ ì•„ë‹™ë‹ˆë‹¤!',
-			'gamemode.wronguse': '&cì‚¬ìš©ë²•:/%0% [ê²Œì„ëª¨ë“œ] [í”Œë ˆì´ì–´]',
-			'heal.wronguse': '&cì‚¬ìš©ë²•:/%0% [í”Œë ˆì´ì–´]',
-			'heal.healed': '&c%0% &6ë‹˜ì´ íšŒë³µë˜ì—ˆìŠµë‹ˆë‹¤.',
-			'top.gototop': '&6ìµœìƒì¸µìœ¼ë¡œ ì´ë™í•˜ì˜€ìŠµë‹ˆë‹¤.',
-			'top.notop': '&cë”ì´ìƒ ìœ„ë¡œ ì˜¬ë¼ê°ˆ ìˆ˜ ì—†ìŠµë‹ˆë‹¤!',
-			'infotool.clicked': '&6ë‹¹ì‹ ì´ í´ë¦­í•œ ë¸”ë¡ì€ &c%0% &6ì…ë‹ˆë‹¤.\n&6ì´ ë„êµ¬ì˜ ì‚¬ìš©ì„ ì¤‘ì§€í•˜ë ¤ë©´ &c/infotool &6ì„ ë‹¤ì‹œ ì…ë ¥í•˜ì„¸ìš”.',
-			'infotool.activated': '&cinfotool&6ì´ ì•„ì´í…œ &c%0% &6ì— ë“±ë¡ë˜ì—ˆìŠµë‹ˆë‹¤. ì‚¬ìš©ì„ ì¤‘ì§€í•˜ì‹œë ¤ë©´ &c/infotool &6ì„ í•œë²ˆ ë” ì…ë ¥í•´ ì£¼ì„¸ìš”.',
-			'infotool.deactivated': '&cinfotool&6ì´ êº¼ì¡ŒìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‚¬ìš©í•˜ì‹œë ¤ë©´ &c/infotool &6ì„ í•œë²ˆ ë” ì…ë ¥í•´ ì£¼ì„¸ìš”.',
-			'infotool.noheld': '&cinfotool ë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•´ì„œëŠ” ì†ì— ë¬´ì–¸ê°€ë¥¼ ë“¤ê³  ìˆì–´ì•¼ í•©ë‹ˆë‹¤.',
-			'time.wronguse': '&cì‚¬ìš©ë²•:/%0% [ì‹œê°„] or /%0% [Set | Add] [ì‹œê°„]',
-			'time.settime': '&6ì‹œê°„ì´ %0% ìœ¼ë¡œ ì„¤ì •ë˜ì—ˆìŠµë‹ˆë‹¤.',
-			'sky.wronguse': '&cì‚¬ìš©ë²•:/%0% [sun|rain]',
-			'sky.changesky': '&6ë‚ ì”¨ê°€ %0% ìœ¼ë¡œ ë°”ë€Œì—ˆìŠµë‹ˆë‹¤.',
-			'lightning.wronguse': '&cì‚¬ìš©ë²•:/%0% (í”Œë ˆì´ì–´)',
-			'lightning.smite': '&6ë²ˆê°œê°€ %0%, %1%, %2% ì— ë–¨ì–´ì¡ŒìŠµë‹ˆë‹¤.',
-			'kick.wronguse': '&cì‚¬ìš©ë²•:/%0% [í”Œë ˆì´ì–´]',
-			'kick.defaultmsg': '&cë‹¹ì‹ ì€ í‚¥ ë˜ì…¨ìŠµë‹ˆë‹¤.',
-			'kick.sucmsg': 'ë‹¹ì‹ ì€ %0% ë‹˜ì„ í‚¥í•˜ì…¨ìŠµë‹ˆë‹¤.',
-			'getpos.wronguse': '&cì‚¬ìš©ë²•:/%0% (í”Œë ˆì´ì–´)',
-			'getpos.printmsg': '&6%0% ë‹˜ì˜ ìœ„ì¹˜ëŠ” &a( %1%, %2%, %3%, %4% )&6 ì…ë‹ˆë‹¤.',
-			'tell.wronguse': '&cì‚¬ìš©ë²•:/%0% [í”Œë ˆì´ì–´] [í• ë§]',
-			'tell.sameperson': '&cìì‹ ì—ê²ŒëŠ” ë©”ì„¸ì§€ë¥¼ ë³´ë‚¼ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.',
-			'reply.wronguse': '&cì‚¬ìš©ë²•:/%0% [í• ë§]',
-			'reply.noplayer': '&cë‹µì¥ì„ ë³´ë‚¼ ìƒëŒ€ê°€ ì—†ìŠµë‹ˆë‹¤.',
-			'killall.help': '&cì‚¬ìš©ë²•:/%0% [ì›”ë“œ]',
-			'killall.complete': '&d%0% ë§ˆë¦¬ì˜ ì—”í‹°í‹°ë“¤ì´ ì œê±°ë˜ì—ˆìŠµë‹ˆë‹¤.',
-			'tppos.wronguse': '&cì‚¬ìš©ë²•: /%0% (x) (y) (z)',
-			'fly.toggle': '&6í”Œë ˆì´ì–´ &f%0% &6ì˜ ë¹„í–‰ ëª¨ë“œë¥¼ %1% &6ì‹œì¼°ìŠµë‹ˆë‹¤.',
-			'fly.true': '&cí™œì„±í™”',
-			'fly.false': '&cë¹„í™œì„±í™”',
-			'chessentials.usage': '&cì‚¬ìš©ë²•: /%0% <reload>',
-			'chessentials.reloaded': '&6CHEssentials ë²„ì „ %0% ë¦¬ë¡œë“œë¨.',
-			'chessentials.version':'0.1-SNAPSHOT'
+			'wronguse': '&c»ç¿ë¹ı: %0%',
+			'noperm': '&cÀÌ°ÍÀ» ½ÇÇàÇÒ ±ÇÇÑÀÌ ¾ø½À´Ï´Ù!',
+			'teleporting': '&6ÅÚ·¹Æ÷Æ® Áß ÀÔ´Ï´Ù..',
+			'gamemode.changed':'&c%0% &6´ÔÀÇ °ÔÀÓ ¸ğµå°¡ &c%1% &6À¸·Î º¯°æµÇ¾ú½À´Ï´Ù.',
+			'noonline': '&c±× ÇÃ·¹ÀÌ¾î´Â ¿Â¶óÀÎÀÌ ¾Æ´Õ´Ï´Ù!',
+			'gamemode.wronguse': '&c»ç¿ë¹ı:/%0% [°ÔÀÓ¸ğµå] [ÇÃ·¹ÀÌ¾î]',
+			'heal.wronguse': '&c»ç¿ë¹ı:/%0% [ÇÃ·¹ÀÌ¾î]',
+			'heal.healed': '&c%0% &6´ÔÀÌ È¸º¹µÇ¾ú½À´Ï´Ù.',
+			'top.gototop': '&6ÃÖ»óÃşÀ¸·Î ÀÌµ¿ÇÏ¿´½À´Ï´Ù.',
+			'top.notop': '&c´õÀÌ»ó À§·Î ¿Ã¶ó°¥ ¼ö ¾ø½À´Ï´Ù!',
+			'infotool.clicked': '&6´ç½ÅÀÌ Å¬¸¯ÇÑ ºí·ÏÀº &c%0% &6ÀÔ´Ï´Ù.\n&6ÀÌ µµ±¸ÀÇ »ç¿ëÀ» ÁßÁöÇÏ·Á¸é &c/infotool &6À» ´Ù½Ã ÀÔ·ÂÇÏ¼¼¿ä.',
+			'infotool.activated': '&cinfotool&6ÀÌ ¾ÆÀÌÅÛ &c%0% &6¿¡ µî·ÏµÇ¾ú½À´Ï´Ù. »ç¿ëÀ» ÁßÁöÇÏ½Ã·Á¸é &c/infotool &6À» ÇÑ¹ø ´õ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.',
+			'infotool.deactivated': '&cinfotool&6ÀÌ ²¨Á³½À´Ï´Ù. ´Ù½Ã »ç¿ëÇÏ½Ã·Á¸é &c/infotool &6À» ÇÑ¹ø ´õ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.',
+			'infotool.noheld': '&cinfotool ¸¦ »ç¿ëÇÏ±â À§ÇØ¼­´Â ¼Õ¿¡ ¹«¾ğ°¡¸¦ µé°í ÀÖ¾î¾ß ÇÕ´Ï´Ù.',
+			'time.wronguse': '&c»ç¿ë¹ı:/%0% [½Ã°£] or /%0% [Set | Add] [½Ã°£]',
+			'time.settime': '&6½Ã°£ÀÌ %0% À¸·Î ¼³Á¤µÇ¾ú½À´Ï´Ù.',
+			'sky.wronguse': '&c»ç¿ë¹ı:/%0% [sun|rain]',
+			'sky.changesky': '&6³¯¾¾°¡ %0% À¸·Î ¹Ù²î¾ú½À´Ï´Ù.',
+			'lightning.wronguse': '&c»ç¿ë¹ı:/%0% (ÇÃ·¹ÀÌ¾î)',
+			'lightning.smite': '&6¹ø°³°¡ %0%, %1%, %2% ¿¡ ¶³¾îÁ³½À´Ï´Ù.',
+			'kick.wronguse': '&c»ç¿ë¹ı:/%0% [ÇÃ·¹ÀÌ¾î]',
+			'kick.defaultmsg': '&c´ç½ÅÀº Å± µÇ¼Ì½À´Ï´Ù.',
+			'kick.sucmsg': '´ç½ÅÀº %0% ´ÔÀ» Å±ÇÏ¼Ì½À´Ï´Ù.',
+			'getpos.wronguse': '&c»ç¿ë¹ı:/%0% (ÇÃ·¹ÀÌ¾î)',
+			'getpos.printmsg': '&6%0% ´ÔÀÇ À§Ä¡´Â &a( %1%, %2%, %3%, %4% )&6 ÀÔ´Ï´Ù.',
+			'tell.wronguse': '&c»ç¿ë¹ı:/%0% [ÇÃ·¹ÀÌ¾î] [ÇÒ¸»]',
+			'tell.sameperson': '&cÀÚ½Å¿¡°Ô´Â ¸Ş¼¼Áö¸¦ º¸³¾ ¼ö ¾ø½À´Ï´Ù.',
+			'reply.wronguse': '&c»ç¿ë¹ı:/%0% [ÇÒ¸»]',
+			'reply.noplayer': '&c´äÀåÀ» º¸³¾ »ó´ë°¡ ¾ø½À´Ï´Ù.',
+			'killall.help': '&c»ç¿ë¹ı:/%0% [¿ùµå]',
+			'killall.complete': '&d%0% ¸¶¸®ÀÇ ¿£Æ¼Æ¼µéÀÌ Á¦°ÅµÇ¾ú½À´Ï´Ù.',
+			'tppos.wronguse': '&c»ç¿ë¹ı: /%0% (x) (y) (z)',
+			'fly.toggle': '&6ÇÃ·¹ÀÌ¾î &f%0% &6ÀÇ ºñÇà ¸ğµå¸¦ %1% &6½ÃÄ×½À´Ï´Ù.',
+			'fly.true': '&cÈ°¼ºÈ­',
+			'fly.false': '&cºñÈ°¼ºÈ­',
+			'chessentials.usage': '&c»ç¿ë¹ı: /%0% <reload>',
+			'chessentials.reloaded': '&6CHEssentials ¹öÀü %0% ¸®·ÎµåµÊ.',
+			'chessentials.version': '0.1-SNAPSHOT',
+			'mail.list': ' &e---- &6¸ŞÀÏ: ÀĞ±â &e-- &6ÆäÀÌÁö &c%0%&6/&c%1% &e----\n&f%2%\n&6¸ŞÀÏÀ» Áö¿ì½Ã·Á¸é &c/mail clear &6¸¦ ÀÔ·ÂÇÏ¼¼¿ä.',
+			'mail.notexist': '&6¹ŞÀº ¸ŞÀÏÀÌ ¾ø½À´Ï´Ù.',
+			'mail.clear': '&6¸ŞÀÏÇÔÀ» ºñ¿ü½À´Ï´Ù.',
+            'mail.send': '&6¸ŞÀÏÀ» º¸³Â½À´Ï´Ù.',
+			'mail.contents': '&6[&f%0%&6] &f%1%'
+		)
+	)
+)
+
+proc(_get_default_mails,
+	return(
+		array(
+			'entrypoint': array('Test mail', 'Hello')
 		)
 	)
 )
@@ -138,6 +169,11 @@ proc(_update_messages,
 	export('chessentials.messages', @config)
 )
 
+proc(_save_mails,
+	@mails = import('chessentials.mails')
+	_write_mails(@mails)
+)
+
 proc(_load_config,
 	if(!_has_config()) {
 		_make_default_config()
@@ -146,10 +182,16 @@ proc(_load_config,
 	if(!_has_messages()) {
 		_make_default_messages()
 	}
+	
+	if(!_has_mails()){
+		_make_default_mails()
+	}
 	export('chessentials.messages', _read_messages())
 	export('chessentials.config', _read_config())
+	export('chessentials.mails', _read_mails())
 	export('chessentials.chat.format', import('chessentials.config')[chat][format])
 	export('chessentials.chat.length', import('chessentials.config')[chat][length])
 	_update_config()
 	_update_messages()
+	_save_mails()
 )

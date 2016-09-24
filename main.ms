@@ -1,7 +1,6 @@
-include('classes/command_executor.ms')
-include('classes/chat/chat_manager.ms')
-include('classes/file/file_handler.ms')
-
+# include('classes/command_executor.ms')
+# include('classes/chat/chat_manager.ms')
+# include('classes/file/file_handler.ms')
 
 _load_config()
 _register_commands()
@@ -43,4 +42,8 @@ bind(async_player_chat, null, null, @e,
 		modify_event('recipients', @hearplaayers)
 	}
 
+)
+
+bind(shutdown, null, null, @e,
+	_save_mails();
 )
