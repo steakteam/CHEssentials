@@ -132,7 +132,8 @@ proc(_get_default_messages,
 			'mail.notexist': '&6받은 메일이 없습니다.',
 			'mail.clear': '&6메일함을 비웠습니다.',
             'mail.send': '&6메일을 보냈습니다.',
-			'mail.contents': '&6[&f%0%&6] &f%1%'
+			'mail.contents': '&6[&f%0%&6] &f%1%',
+            'suicided': '&6자살했습니다.'
 		)
 	)
 )

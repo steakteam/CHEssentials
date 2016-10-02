@@ -1,21 +1,29 @@
 proc(_execute, @command, @array, @messages, @config,
-	@loc = ploc(player())
-	@y = @loc[y]
-	for(@i=255,@i > @y,@i--) {
-		array_set(@loc, 1, @i)
-		array_set(@loc, y, @i)
-		@block = get_block_at(@loc)
-		if(!_is_passable_block(@block)) {
-			set_ploc(@loc)
-			msg(_pm(@messages['top.gototop']))
-			return()
-		}
-	}
-	msg(_pm(@messages['top.notop']))
+	@topLoc = _get_top(ploc(player()));
+    if(@topLoc != null){
+        set_ploc(@topLoc);
+		msg(_pm(@messages['top.gototop']))
+    }else{
+        msg(_pm(@messages['top.notop']))
+    }
 )
 
 proc(_has_permission,
 return(has_permission(player(), 'che.command.top'))
+)
+
+proc(_get_top, @loc,
+    @clone = array_deep_clone(@loc);
+    @y = @clone['y'];
+    for(@i = 255, @i > @y, @i--){
+        @clone[1] = @i;
+        @clone['y'] = @i;
+        @block = get_block_at(@clone);
+        if(!_is_passable_block(@block)){
+            return(@clone);
+        }
+    }
+    return(null);
 )
 
 proc(_is_passable_block, @id,
