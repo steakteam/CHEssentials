@@ -15,7 +15,8 @@ return(has_permission(player(), 'che.command.top'))
 proc(_get_top, @loc,
     @clone = array_deep_clone(@loc);
     @y = @clone['y'];
-    for(@i = 255, @i > @y, @i--){
+    @height = world_info(@loc['world'])['maxheight'];
+    for(@i = @height, @i > @y, @i--){
         @clone[1] = @i;
         @clone['y'] = @i;
         @block = get_block_at(@clone);
