@@ -41,11 +41,6 @@ proc _read_messages(@locale = '') {
 	return(ini_decode(@properties))
 }
 
-proc _read_mails() {
-	@json = _read_file_in_folder('mails.json')
-	return(json_decode(@json))
-}
-
 proc _write_config(@configArray) {
 	_write_file_in_folder('config.yml', yml_encode(@configArray, true))
 }
@@ -54,20 +49,12 @@ proc _write_messages(@messageArray) {
 	_write_file_in_folder('messages.properties', ini_encode(@messageArray))
 }
 
-proc _write_mails(@mailArray) {
-	_write_file_in_folder('mails.json', json_encode(@mailArray))
-}
-
 proc _has_config() {
 	return(file_exists('../../../../CHEssentials/config.yml'))
 }
 
 proc _has_messages() {
 	return(file_exists('../../../../CHEssentials/messages.properties'))
-}
-
-proc _has_mails() {
-	return(file_exists('../../../../CHEssentials/mails.json'))
 }
 
 proc _make_default_config() {
@@ -143,6 +130,8 @@ proc _get_default_messages() {
             'mail.send': '&6메일을 보냈습니다.',
 			'mail.contents': '&6[&f{0}&6] &f{1}',
 			'mail.wronguse': '&c사용법: /{0} [read|clear|send] [to] [message]|sendall [message]',
+			'mail.unread': '&6읽지 않은 메일이 &c{0} &6개 있습니다. 읽으시려면 &c/mail read &6를 입력하세요.',
+			'mail.noreciver': '&c해당 유저는 존재하지 않습니다.',
             'suicided': '&6자살했습니다.',
 			'outtell':'&6[&c{0}&6 -> &c{1}&6] &r{2}',
 			'receivetell':'&6[&c{0}&6 -> &c{1}&6] &r{2}',
@@ -166,10 +155,6 @@ proc _get_default_messages() {
 			'afk.kicked': '&cAFK &6상태를 너무 오래 유지하여 서버에서 추방되셨습니다!'
 		)
 	)
-}
-
-proc _get_default_mails() {
-	return(array())
 }
 
 proc _update_config() {
@@ -196,11 +181,6 @@ proc _update_messages() {
 	export('chessentials.messages', @config)
 }
 
-proc _save_mails() {
-	@mails = import('chessentials.mails')
-	_write_mails(@mails)
-}
-
 proc _load_config() {
 	if(!_has_config()) {
 		_make_default_config()
@@ -209,20 +189,14 @@ proc _load_config() {
 	if(!_has_messages()) {
 		_make_default_messages()
 	}
-	
-	if(!_has_mails()){
-		_make_default_mails()
-	}
 	export('chessentials.config', _read_config())
 	if(import('chessentials.config')[locale] != 'default') {
 		export('chessentials.messages', _read_messages(import('chessentials.config')[locale]))
 	} else {
 		export('chessentials.messages', _read_messages())
 	}
-	export('chessentials.mails', _read_mails())
 	_update_config()
 	_update_messages()
-	_save_mails()
 	# Reset AFK Timer
 	foreach(@player in all_players()) {
 		if(import('chessentials.config')['auto-afk'] != '-1') {

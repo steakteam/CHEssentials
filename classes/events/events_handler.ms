@@ -1,6 +1,6 @@
 proc _bind_events() {
 	_bind_infotool_event()
-	_bind_mailsave_event()
+	_bind_userdata_event()
 	_bind_timer()
 	_bind_afk_event()
 }
@@ -14,9 +14,39 @@ proc _bind_infotool_event() {
 	)
 }
 
-proc _bind_mailsave_event() {
-	bind(shutdown, null, null, @e,
-		_save_mails()
+proc _bind_userdata_event() {
+	include('../file/userdata_handler.ms')
+	bind(player_join, null, null, @e,
+		_set_user_data(@e[player], 'lastAccountName', @e[player])
+		_add_puuid(@e[player], puuid(@e[player]))
+		if(_has_user_data(@e[player], 'timestamps')) {
+			@timestamps = _get_user_data(@e[player], 'timestamps')
+		}
+		array_set(@timestamps, 'login', time())
+		_set_user_data(@e[player], 'timestamps', yml_encode(@timestamps, true))
+		_set_user_data(@e[player], 'ipAddress', pinfo(@e[player], 3))
+		if(array_size(_mail_read(@e[player])) > 0) {
+			msg(_pm(import('chessentials.messages')['mail.unread'], array(array_size(_mail_read(@e[player])))))
+		}
+	)
+	
+	bind(player_quit, null, null, @e,
+		@timestamps = array()
+		if(_has_user_data(@e[player], 'timestamps')) {
+			@timestamps = _get_user_data(@e[player], 'timestamps')
+		}
+		array_set(@timestamps, 'logout', time())
+		_set_user_data(@e[player], 'timestamps', yml_encode(@timestamps, true))
+		_set_user_data(@e[player], 'logoutLocation', 
+			yml_encode(array(
+				'world': ploc()[world],
+				'x': ploc()[x],
+				'y': ploc()[y],
+				'z': ploc()[z],
+				'yaw': ploc()[yaw],
+				'pitch': ploc()[pitch]
+			), true)
+		)
 	)
 }
 

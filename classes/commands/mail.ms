@@ -1,47 +1,48 @@
 proc _execute(@command, @array, @messages, @config) {
+	include('../file/userdata_handler.ms')
 	switch(array_size(@array)){
 		case 1:
 			if(@array[0] == 'read'){
-				@mailArray = _get_mails(player());
-				@mailSize = array_size(@mailArray);
-				@remainder = @mailSize % 9;
+				@mailArray = _mail_read(player())
+				@mailSize = array_size(@mailArray)
+				@remainder = @mailSize % 9
 				if(@mailSize > 0){
-					@contents = null;
-					@maxPage = integer(@mailSize / 9);
+					@contents = null
+					@maxPage = integer(@mailSize / 9)
 					
 					if(@remainder > 0){
-						@maxPage += 1;
+						@maxPage += 1
 					}
 					
 					for(@i = 0,@i < 9, @i++){
                         if(array_index_exists(@mailArray, @i)){
                             if(@contents != null
                                 ,@contents = @contents . '\n' . @mailArray[@i]
-                                ,@contents = @mailArray[@i]);
+                                ,@contents = @mailArray[@i])
                         }else{
-                            break();
+                            break()
                         }
 					}
-					msg(_pm(@messages['mail.list'], array(1, @maxPage, @contents)));
+					msg(_pm(@messages['mail.list'], array(1, @maxPage, @contents)))
 				}else{
-					msg(_pm(@messages['mail.notexist']));
+					msg(_pm(@messages['mail.notexist']))
 				}
 			}else if(@array[0] == 'clear'){
-				_clear_mail(player());
-                msg(_pm(@messages['mail.clear']));
+				_mail_clear(player())
+                msg(_pm(@messages['mail.clear']))
 			}else{
 				msg(_pm(
 					@messages['mail.wronguse'], 
 					array(@command)
-				));
+				))
 			}
-			break();
+			break()
 		case 2:
 			if(@array[0] == 'sendall'){
 				foreach(@player in get_offline_players()){
-					_send_mail(player(), @player, @array[1], _pm(@messages['mail.contents']));
+					_mail_send(_pm(@messages['mail.contents'], array(player(), @array[1])), @player)
 				}
-                msg(_pm(@messages['mail.send']));
+                msg(_pm(@messages['mail.send']))
 			}else if(@array[0] == 'read'){
 				@page = integer(@array[1]); //2
 				@tick = @page * 9;
@@ -74,8 +75,12 @@ proc _execute(@command, @array, @messages, @config) {
 			break();
 		case 3:
 			if(@array[0] == 'send'){
-				_send_mail(player(), @array[1], @array[2], _pm(@messages['mail.contents']));
-                msg(_pm(@messages['mail.send']));
+				if(_mail_send(_pm(@messages['mail.contents'], array(player(), @array[2])), @array[1])) {
+					msg(_pm(@messages['mail.send']))
+				} else {
+					msg(_pm(@messages['mail.noreciver']))
+				}
+                
 			}else{
 				msg(_pm(
 					@messages['mail.wronguse'], 
@@ -96,37 +101,5 @@ proc _has_permission() {
 }
 
 proc _command() {
-	return(array('mail', 'email', 'memo'))
-}
-
-proc _get_mails(@player) {
-	@name = to_lower(@player);
-	@mailFile = import('chessentials.mails');
-	@mailArray = array();
-	if(array_index_exists(@mailFile, to_lower(@name))){
-		@mailArray = @mailFile[@name];
-	}
-	return(@mailArray);
-}
-
-proc _send_mail(@sender, @receiver, @contents, @template) {
-
-    @receiverToLower = to_lower(@receiver);
-    @mailFile = import('chessentials.mails');
-    @mailArray = _get_mails(@receiver);
-    @mailContent = _pm(@template, array(@sender, colorize(@contents)));
-    
-    if(array_size(@mailArray) > 0){
-        array_push(@mailArray, @mailContent);
-        @mailFile[@receiverToLower] = @mailArray;
-    }else{
-        @mailFile[@receiverToLower] = array(@mailContent);
-    }
-	export('chessentials.mails', @mailFile)
-}
-
-proc _clear_mail(@player) {
-	@mailFile = import('chessentials.mails');
-	array_remove(@mailFile, to_lower(@player));
-	export('chessentials.mails', @mailFile);
+	return(array('mail', 'email'))
 }
