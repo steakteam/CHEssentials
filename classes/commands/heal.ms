@@ -1,4 +1,4 @@
-proc(_execute, @command, @array, @messages, @config,
+proc _execute(@command, @array, @messages, @config) {
 	if(array_size(@array) == 0) {
 		set_phealth(get_max_health(entity_id(pinfo(player(), 13))))
 		set_phunger(20)
@@ -15,12 +15,12 @@ proc(_execute, @command, @array, @messages, @config,
 	} else {
 		msg(_pm(@messages['heal.wronguse'], array(@command)))
 	}
-)
+}
 
-proc(_has_permission,
+proc _has_permission() {
 	return(has_permission(player(), 'che.command.heal'))
-)
+}
 
-proc(_command,
+proc _command() {
 	return(array('heal'))
-)
+}

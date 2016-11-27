@@ -1,4 +1,4 @@
-proc(_execute, @command, @array, @messages, @config,
+proc _execute(@command, @array, @messages, @config) {
 
 	if(array_size(@array) == 0){
 		@loc = pcursor(player(), array(0))
@@ -13,10 +13,12 @@ proc(_execute, @command, @array, @messages, @config,
 	}else{ 
 		die(_pm(@messages['lightning.wronguse'], array(@command)))
 	}
-)
+}
 
-proc(_has_permission,
-return(has_permission(player(), 'che.command.lightning'))
-)
+proc _has_permission() {
+	return(has_permission(player(), 'che.command.lightning'))
+}
 
-proc(_command, return(array('lightning')))
+proc _command() {
+	return(array('lightning'))
+}

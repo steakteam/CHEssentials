@@ -1,4 +1,4 @@
-proc(_execute, @command, @array, @messages, @config,
+proc _execute(@command, @array, @messages, @config) {
 	if(array_size(@array) == 0) {
 		if(pmode(player()) == 'SURVIVAL') {
 			set_pmode(player(), 'CREATIVE')
@@ -58,12 +58,12 @@ proc(_execute, @command, @array, @messages, @config,
 	} else {
 		msg(colorize(@messages['gamemode.wronguse'], array(@command)))
 	}
-)
+}
 
-proc(_has_permission,
-return(has_permission(player(), 'che.command.gamemode'))
-)
+proc _has_permission() {
+	return(has_permission(player(), 'che.command.gamemode'))
+}
 
-proc(_command,
+proc _command() {
 	return(array('gamemode', 'gm'))
-)
+}

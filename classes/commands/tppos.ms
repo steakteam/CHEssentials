@@ -1,4 +1,4 @@
-proc(_execute, @command, @array, @messages, @config,
+proc _execute(@command, @array, @messages, @config) {
 
 	if(array_size(@array) == 3){
 	
@@ -9,16 +9,18 @@ proc(_execute, @command, @array, @messages, @config,
 			msg(_pm(@messages['tppos.wronguse'], array(@command)))
 		)
 	
-	}else{
+	} else {
 	
 		die(_pm(@messages['tppos.wronguse'], array(@command)))
 	
 	}
 
-)
+}
 
-proc(_has_permission,
-return(has_permission(player(), 'che.command.tppos'))
-)
+proc _has_permission() {
+	return(has_permission(player(), 'che.command.tppos'))
+}
 
-proc(_command, return(array('tppos')))
+proc _command() { 
+	return(array('tppos'))
+}

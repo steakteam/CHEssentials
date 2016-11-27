@@ -1,8 +1,4 @@
-/* 
-Usage: /mail [read|clear|send] [to] [message]|sendall [message] 
-/mail send EntryPoint test
-*/
-proc(_execute, @command, @array, @messages, @config,
+proc _execute(@command, @array, @messages, @config) {
 	switch(array_size(@array)){
 		case 1:
 			if(@array[0] == 'read'){
@@ -35,8 +31,8 @@ proc(_execute, @command, @array, @messages, @config,
                 msg(_pm(@messages['mail.clear']));
 			}else{
 				msg(_pm(
-					@messages['wronguse'], 
-					array('/mail [read|clear|send] [to] [message]|sendall [message]')
+					@messages['mail.wronguse'], 
+					array(@command)
 				));
 			}
 			break();
@@ -71,8 +67,8 @@ proc(_execute, @command, @array, @messages, @config,
 				msg(_pm(@messages['mail.list'], array(@page, @maxPage, @contents)));
 			}else{
 				msg(_pm(
-					@messages['wronguse'], 
-					array('/mail [read|clear|send] [to] [message]|sendall [message]')
+					@messages['mail.wronguse'], 
+					array(@command)
 				));
 			}
 			break();
@@ -82,26 +78,28 @@ proc(_execute, @command, @array, @messages, @config,
                 msg(_pm(@messages['mail.send']));
 			}else{
 				msg(_pm(
-					@messages['wronguse'], 
-					array('/mail [read|clear|send] [to] [message]|sendall [message]')
+					@messages['mail.wronguse'], 
+					array(@command)
 				));
 			}
 			break();
 		default:
 			msg(_pm(
-				@messages['wronguse'], 
-				array('/mail [read|clear|send] [to] [message]|sendall [message]')
+				@messages['mail.wronguse'], 
+				array(@command)
 			));
 	}
-)
+}
 
-proc(_has_permission,
+proc _has_permission() {
 	return(has_permission(player(), 'che.command.mail'))
-)
+}
 
-proc(_command, return(array('mail', 'email', 'memo')))
+proc _command() {
+	return(array('mail', 'email', 'memo'))
+}
 
-proc(_get_mails, @player,
+proc _get_mails(@player) {
 	@name = to_lower(@player);
 	@mailFile = import('chessentials.mails');
 	@mailArray = array();
@@ -109,9 +107,9 @@ proc(_get_mails, @player,
 		@mailArray = @mailFile[@name];
 	}
 	return(@mailArray);
-)
+}
 
-proc(_send_mail, @sender, @receiver, @contents, @template,
+proc _send_mail(@sender, @receiver, @contents, @template) {
 
     @receiverToLower = to_lower(@receiver);
     @mailFile = import('chessentials.mails');
@@ -125,10 +123,10 @@ proc(_send_mail, @sender, @receiver, @contents, @template,
         @mailFile[@receiverToLower] = array(@mailContent);
     }
 	export('chessentials.mails', @mailFile)
-)
+}
 
-proc(_clear_mail, @player,
+proc _clear_mail(@player) {
 	@mailFile = import('chessentials.mails');
 	array_remove(@mailFile, to_lower(@player));
 	export('chessentials.mails', @mailFile);
-)
+}

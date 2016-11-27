@@ -1,4 +1,4 @@
-proc(_execute, @command, @array, @messages, @config,
+proc _execute(@command, @array, @messages, @config) {
 
 	if(array_size(@array) <= 1){
 		die(_pm(@messages['tell.wronguse'], array(@command)));
@@ -9,8 +9,6 @@ proc(_execute, @command, @array, @messages, @config,
 		if(equals_ic(@p, @targetp)){ die(_pm(@messages['tell.sameperson'])); }
 		array_remove(@array, 0)
 		@as = array_size(@array)
-		@format1 = @config['outtell']
-		@format2 = @config['receivetell']
 		
 		@message = '';
 		
@@ -18,8 +16,8 @@ proc(_execute, @command, @array, @messages, @config,
 			@message = sconcat(@message, @array[@di])
 		}
 		
-		@smsg = replace(replace(replace(@format1, '<me>', @p), '<targetplayer>', @targetp), '<message>', @message)
-		@tmsg = replace(replace(replace(@format2, '<me>', @p), '<targetplayer>', @targetp), '<message>', @message)
+		@smsg = _pm(@messages['msgformat'], array(@p, @targetp, @message))
+		@tmsg = _pm(@messages['msgformat'], array(@targetp, @p, @message))
 		
 		msg(@smsg)
 		tmsg(@targetp, @tmsg)
@@ -27,10 +25,12 @@ proc(_execute, @command, @array, @messages, @config,
 		export(@targetp.'.lastsender', @p)
 	}
 
-)
+}
 
-proc(_has_permission,
-return(has_permission(player(), 'che.command.tell'))
-)
+proc _has_permission() {
+	return(has_permission(player(), 'che.command.tell'))
+}
 
-proc(_command, return(array('tell', 'whisper', 'w', 't', 'msg', 'm')))
+proc _command() { 
+	return(array('tell', 'whisper', 'w', 't', 'msg', 'm'))
+}

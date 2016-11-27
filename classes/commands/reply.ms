@@ -1,4 +1,4 @@
-proc(_execute, @command, @array, @messages, @config,
+proc _execute(@command, @array, @messages, @config) {
 
 	if(array_size(@array) == 0){
 		die(_pm(@messages['reply.wronguse'], array(@command)));
@@ -11,8 +11,6 @@ proc(_execute, @command, @array, @messages, @config,
 	if(!ponline(@targetp)){ msg(_pm(@message['noonline'])); die(_pm(@messages['reply.wronguse'], array(@command))); }
 	
 	@as = array_size(@array)
-	@format1 = @config['outtell']
-	@format2 = @config['receivetell']
 	
 	@message = '';
 	
@@ -20,8 +18,8 @@ proc(_execute, @command, @array, @messages, @config,
 		@message = sconcat(@message, @array[@di])
 	}
 	
-	@smsg = replace(replace(replace(@format1, '<me>', @p), '<targetplayer>', @targetp), '<message>', @message)
-	@tmsg = replace(replace(replace(@format2, '<me>', @p), '<targetplayer>', @targetp), '<message>', @message)
+	@smsg = _pm(@messages['msgformat'], array(@p, @targetp, @message))
+		@tmsg = _pm(@messages['msgformat'], array(@targetp, @p, @message))
 	
 	msg(@smsg)
 	tmsg(@targetp, @tmsg)
@@ -30,10 +28,12 @@ proc(_execute, @command, @array, @messages, @config,
 	
 	
 	}
-)
+}
 
-proc(_has_permission,
-return(has_permission(player(), 'che.command.reply'))
-)
+proc _has_permission() {
+	return(has_permission(player(), 'che.command.reply'))
+}
 
-proc(_command, return(array('reply', 'r')))
+proc _command() {
+	return(array('reply', 'r')))
+}

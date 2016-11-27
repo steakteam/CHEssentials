@@ -1,6 +1,4 @@
-#sky, weather
-
-proc(_execute, @command, @array, @messages, @config,
+proc _execute(@command, @array, @messages, @config) {
 
 	if(array_size(@array) == 0 || array_size(@array) >= 3){
 		die(_pm(@messages['sky.wronguse'], array(@command)));
@@ -16,10 +14,12 @@ proc(_execute, @command, @array, @messages, @config,
 		}
 			die(_pm(@messages['sky.changesky'], array(@weather)));
 	}
-)
+}
 
-proc(_has_permission,
-return(has_permission(player(), 'che.command.sky'))
-)
+proc _has_permission() {
+	return(has_permission(player(), 'che.command.sky'))
+}
 
-proc(_command, return(array('sky', 'weather')))
+proc _command() {
+	return(array('sky', 'weather'))
+}

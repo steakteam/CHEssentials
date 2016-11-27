@@ -1,4 +1,4 @@
-proc(_execute, @command, @array, @messages, @config,
+proc _execute(@command, @array, @messages, @config) {
     @currSpawnLoc = get_spawn(pworld(player()));
     @top = _get_top(@currSpawnLoc);
     if(@top != null){
@@ -7,10 +7,12 @@ proc(_execute, @command, @array, @messages, @config,
         set_ploc(@currSpawnLoc);
     }
     msg(_pm(@messages['teleporting']));
-)
+}
 
-proc(_has_permission,
-return(has_permission(player(), 'che.command.spawn'))
-)
+proc _has_permission() {
+	return(has_permission(player(), 'che.command.spawn'))
+}
 
-proc(_command, return(array('spawn')))
+proc _command() { 
+	return(array('spawn'))
+}

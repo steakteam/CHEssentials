@@ -1,4 +1,4 @@
-proc(_execute, @command, @array, @messages, @config,
+proc _execute(@command, @array, @messages, @config) {
 	
 	if(array_size(@array) == 0){
 		die(_pm(@messages['kick.wronguse'], array(@command)));
@@ -8,7 +8,7 @@ proc(_execute, @command, @array, @messages, @config,
 	
 		@p = @array[0]
 		if(!ponline(@p)){ msg(_pm(@messages['noonline'])); die(_pm(@messages['kick.wronguse'], array(@command))); }
-		pkick(@p, _pm(replace(@messages['kick.defaultmsg'], '&', '§')))
+		pkick(@p, _pm(@messages['kick.defaultmsg']))
 		die(_pm(@messages['kick.sucmsg'], array(@p)));
 		
 	}
@@ -26,15 +26,17 @@ proc(_execute, @command, @array, @messages, @config,
 			@msg = sconcat(@msg, @array[@di])
 		}
 		
-		pkick(@p, replace(@msg, '&', '§'))
+		pkick(@p, colorize(@msg))
 		die(_pm(@message['kick.sucmsg'], array(@p)));
 	
 	}
 
-)
+}
 
-proc(_has_permission,
-return(has_permission(player(), 'che.command.kick'))
-)
+proc _has_permission() {
+	return(has_permission(player(), 'che.command.kick'))
+}
 
-proc(_command, return(array('kick')))
+proc _command() {
+	return(array('kick'))
+}

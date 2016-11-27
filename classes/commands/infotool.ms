@@ -1,4 +1,4 @@
-proc(_execute, @command, @array, @messages, @config,
+proc _execute(@command, @array, @messages, @config) {
 	if(has_bind(player().'.infotool')) {
 		unbind(player().'.infotool')
 		export(player().'.infotool', 'none')
@@ -14,12 +14,12 @@ proc(_execute, @command, @array, @messages, @config,
 		)
 		msg(_pm(@messages['infotool.activated'], array(pinv(player(), null)[type].':'.pinv(player(), null)[data])))
 	}
-)
+}
 
-proc(_has_permission,
+proc _has_permission() {
 return(has_permission(player(), 'che.command.infotool'))
-)
+}
 
-proc(_command,
+proc _command() {
 	return(array('infotool'))
-)
+}

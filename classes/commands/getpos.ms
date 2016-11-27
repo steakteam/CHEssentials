@@ -1,4 +1,4 @@
-proc(_execute, @command, @array, @messages, @config,
+proc _execute(@command, @array, @messages, @config) {
 	
 	if(array_size(@array) == 0){
 		@p = player();
@@ -12,12 +12,12 @@ proc(_execute, @command, @array, @messages, @config,
 		die(_pm(@messages['getpos.printmsg'], array(@p, @loc[0], @loc[1], @loc[2], @loc[world])));
 	}
 
-)
+}
 
-proc(_has_permission,
-return(has_permission(player(), 'che.command.getpos'))
-)
+proc _has_permission() {
+	return(has_permission(player(), 'che.command.getpos'))
+}
 
-proc(_command,
+proc _command() {
 	return(array('getpos'))
-)
+}
