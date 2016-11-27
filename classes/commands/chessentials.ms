@@ -16,5 +16,5 @@ return(has_permission(player(), 'che.command.chessentials'))
 }
 
 proc _command() {
-	return(array('che', 'chessentials'))) # Commands in array
+	return(array('che', 'chessentials')) # Commands in array
 }

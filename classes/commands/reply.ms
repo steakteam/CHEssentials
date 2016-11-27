@@ -35,5 +35,5 @@ proc _has_permission() {
 }
 
 proc _command() {
-	return(array('reply', 'r')))
+	return(array('reply', 'r'))
 }

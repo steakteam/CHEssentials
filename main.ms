@@ -1,5 +1,6 @@
 _load_config()
 _register_commands()
+_bind_events()
 bind(player_command, null, null, @e,
 	@string = split('', @e[prefix])
 	@prefix = to_lower(replace(@e[prefix], '/', ''))
