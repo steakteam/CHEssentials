@@ -78,7 +78,11 @@ proc _get_default_config() {
 	return(
 		array(
 			'chat':array('format': '<{DISPLAYNAME}> {MESSAGE}', 'radius':'0'),
-			'locale':'default'
+			'locale':'default',
+			'heal-cooldown': 0,
+			'feed-cooldown': 0,
+			'auto-afk': 300,
+			'auto-afk-kick': -1
 		)
 	)
 }
@@ -102,6 +106,8 @@ proc _get_default_messages() {
 			'gamemode.wronguse': '&c사용법:/{0} [게임모드] [플레이어]',
 			'heal.wronguse': '&c사용법:/{0} [플레이어]',
 			'heal.healed': '&c{0} &6님이 회복되었습니다.',
+			'feed.feeded.myself': '&6배고픔이 해결되었습니다.',
+			'feed.noperm.others': '&c다른 사람의 배고픔을 채울 권한이 없습니다!',
 			'top.gototop': '&6최상층으로 이동하였습니다.',
 			'top.notop': '&c더이상 위로 올라갈 수 없습니다!',
 			'infotool.clicked': '&6당신이 클릭한 블록은 &c{0} &6입니다.\n&6이 도구의 사용을 중지하려면 &c/infotool &6을 다시 입력하세요.',
@@ -139,7 +145,25 @@ proc _get_default_messages() {
 			'mail.wronguse': '&c사용법: /{0} [read|clear|send] [to] [message]|sendall [message]',
             'suicided': '&6자살했습니다.',
 			'outtell':'&6[&c{0}&6 -> &c{1}&6] &r{2}',
-			'receivetell':'&6[&c{0}&6 -> &c{1}&6] &r{2}'
+			'receivetell':'&6[&c{0}&6 -> &c{1}&6] &r{2}',
+			'break.nosight':'&c보고있는 블록이 없습니다!',
+			'break.nobedrock':'&c기반암은 부술 수 없습니다!',
+			'break.sucess':'&6블록을 부쉈습니다.',
+			'bigtree.wronguse': '&c사용법: /{0} <tree|redwood|jungle>',
+			'bigtree.notground': '&c나무는 땅에만 설치할 수 있습니다!',
+			'bigtree.generated': '&c{0} &6가 생성되었습니다.',
+			'bigtree.notgenerated': '&4{0} &c가 생성되지 않았습니다!',
+			'treetype.bigtree': '참나무',
+			'treetype.redwood': '가문비나무',
+			'treetype.jungle': '정글 나무',
+			'feed.wronguse': '&c사용법:/{0} [플레이어]',
+			'feed.feeded': '&c{0} &6님의 배고픔이 해결되었습니다.',
+			'feed.feeded.myself': '&6배고픔이 해결되었습니다.',
+			'feed.noperm.others': '&c다른 사람의 배고픔을 채울 권한이 없습니다!',
+			'command.cooldown': '&c{0} &6초 후에 이 명령어를 다시 사용하실 수 있습니다.',
+			'afk.on': '&r{0} &6님이 &cAFK &6상태가 되셨습니다.',
+			'afk.off': '&r{0} &6님이 &cAFK &6상태를 해제하셨습니다.',
+			'afk.kicked': '&cAFK &6상태를 너무 오래 유지하여 서버에서 추방되셨습니다!'
 		)
 	)
 }
@@ -199,4 +223,16 @@ proc _load_config() {
 	_update_config()
 	_update_messages()
 	_save_mails()
+	# Reset AFK Timer
+	foreach(@player in all_players()) {
+		if(import('chessentials.config')['auto-afk'] != '-1') {
+			if(import(@player.'.autoafktimer') == 'afk') {
+				broadcast(_pm(import('chessentials.messages')['afk.off'], array(@player)))
+			}
+			export(@player.'.autoafktimer', import('chessentials.config')['auto-afk'])
+		}
+		if(import('chessentials.config')['auto-afk-kick'] != '-1') {
+			export(@player.'.autoafkkicktimer', import('chessentials.config')['auto-afk-kick'])
+		}
+	}
 }

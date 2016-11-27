@@ -10,5 +10,5 @@ proc _pm(@message, @array = '') {
 
 #version proc
 proc _get_che_version() {
-	return('0.1-DEV')
+	return('0.1.1-DEV')
 }
