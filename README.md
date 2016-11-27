@@ -5,20 +5,20 @@ Essentials plugin rework for CommandHelper
 
 CommandHelper
 
-CHFiles(Download at [Here](https://github.com/itstake/CHFiles/releases))
+CHFiles(Download at [Here](https://github.com/steakteam/CHFiles/releases))
 
 
 # 설치 방법
 
-이 Repo 를 Zip 파일로 다운받은 뒤, 압축을 풀어 LocalPackages 폴더에 넣으세요.
+[이곳](https://github.com/steakteam/CHEssentials/releases) 에서 최신버전을 다운로드 받으실 수 있습니다.
 
-예)
+다운로드 받아 CommandHelper 폴더 내부 LocalPackages 폴더에 붙여넣으면 설치가 완료됩니다.
 
-LocalPackages/
+# Source 버전 다운로드 방법
 
-    CHEssnetials/
-    
-	    파일들...
+이 Repo 를 zip 파일로 다운로드 하여, 압축을 풀어 나온 CHEssentials-master 폴더를
+
+CommandHelper 폴더 내부 LocalPackages 폴더 안에 넣으시면 설치가 완료됩니다.
 	    
 #Copyright
 
