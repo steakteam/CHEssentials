@@ -131,7 +131,6 @@ proc _get_default_messages() {
 			'fly.false': '&c비활성화',
 			'chessentials.usage': '&c사용법: /{0} <reload>',
 			'chessentials.reloaded': '&6CHEssentials 버전 {0} 리로드됨.',
-			'chessentials.version': '0.1-SNAPSHOT',
 			'mail.list': ' &e---- &6메일: 읽기 &e-- &6페이지 &c{0}&6/&c{1} &e----\n&f{2}\n&6메일을 지우시려면 &c/mail clear &6를 입력하세요.',
 			'mail.notexist': '&6받은 메일이 없습니다.',
 			'mail.clear': '&6메일함을 비웠습니다.',
