@@ -93,6 +93,7 @@ proc _get_default_messages() {
 			'gamemode.wronguse': '&c사용법:/{0} [게임모드] [플레이어]',
 			'heal.wronguse': '&c사용법:/{0} [플레이어]',
 			'heal.healed': '&c{0} &6님이 회복되었습니다.',
+			'heal.healed.myself': '&6회복되었습니다.',
 			'feed.feeded.myself': '&6배고픔이 해결되었습니다.',
 			'feed.noperm.others': '&c다른 사람의 배고픔을 채울 권한이 없습니다!',
 			'top.gototop': '&6최상층으로 이동하였습니다.',
