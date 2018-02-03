@@ -153,7 +153,9 @@ proc _get_default_messages() {
 			'command.cooldown': '&c{0} &6초 후에 이 명령어를 다시 사용하실 수 있습니다.',
 			'afk.on': '&r{0} &6님이 &cAFK &6상태가 되셨습니다.',
 			'afk.off': '&r{0} &6님이 &cAFK &6상태를 해제하셨습니다.',
-			'afk.kicked': '&cAFK &6상태를 너무 오래 유지하여 서버에서 추방되셨습니다!'
+			'afk.kicked': '&cAFK &6상태를 너무 오래 유지하여 서버에서 추방되셨습니다!',
+			'afk.wronguse.withothers': '&c사용법: /{0} [플레이어]',
+			'afk.wronguse': '&c사용법: /{0}'
 		)
 	)
 }

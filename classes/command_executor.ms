@@ -51,5 +51,6 @@ proc _register_commands() {
 				_che_run_cmd(@prefix, @array, import('chessentials.messages'), import('chessentials.config'))
 			}
 		}
+		modify_event('command', @e[command])
 	)
 }
