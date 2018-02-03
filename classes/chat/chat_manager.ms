@@ -33,6 +33,6 @@ proc _bind_chat_formatter() {
 				array_index_exists(import('chessentials.config')[chat]['group-formats'], pgroup(@e[player])[0])) {
 			@format = _chat_format_parse(import('chessentials.config')[chat]['group-formats'][pgroup(@e[player])[0]], @e[player], @e[message])
 		}
-
+		modify_event('format', @format)
 	)
 }

@@ -1,7 +1,7 @@
 proc _execute(@command, @array, @messages, @config) {
 	if(import(player().'.feedcooldown') == null || has_permission('che.command.feed.cooldown.bypass')) {
 		if(array_size(@array) == 0) {
-			set_phealth(get_max_health(entity_id(pinfo(player(), 13))))
+			set_phealth(get_max_health(pinfo(player(), 13)))
 			set_phunger(20)
 			msg(_pm(@messages['heal.healed.myself']))
 			if(!has_permission('che.command.heal.cooldown.bypass')) {
@@ -10,7 +10,7 @@ proc _execute(@command, @array, @messages, @config) {
 		} else if(array_size(@array) == 1) {
 			if(has_permission('che.command.heal.others')) {
 				if(ponline(@array[0])) {
-					set_phealth(get_max_health(entity_id(pinfo(player(), 13))))
+					set_phealth(get_max_health(pinfo(player(), 13)))
 					set_phunger(20)
 					msg(_pm(@messages['heal.healed'], array(@array[0])))
 					tmsg(@array[0], _pm(@messages['heal.healed'], array(@array[0])))
